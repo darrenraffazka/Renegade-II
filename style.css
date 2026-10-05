@@ -1,0 +1,15 @@
+li {
+  list-style-type: none;
+}
+
+.content {
+  margin-left: 5vw;
+  margin-right: 5vw;
+  text-align: center;
+  justify-content: center;
+
+  ul {
+    margin: 0;
+    list-style-position: inside;
+  }
+}
