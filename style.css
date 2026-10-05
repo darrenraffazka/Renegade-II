@@ -1,9 +1,11 @@
 body {
-  background-color: #000;
+  background: linear-gradient(135deg, #1a0033, #3a0ca3, #0077b6);
+  background-attachment: fixed;
   color: #fff;
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 20px 0;
+  padding: 20px 0 40px;
+  min-height: 100vh;
 }
 
 li {
@@ -17,6 +19,18 @@ li {
   justify-content: center;
 }
 
+h1 {
+  font-size: 2.6rem;
+  background: linear-gradient(90deg, #ff4d6d, #ffd60a, #4cc9f0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+h2 {
+  color: #ffd60a;
+}
+
 .content ul {
   margin: 0;
   padding: 0;
@@ -25,7 +39,15 @@ li {
 
 .content li {
   display: inline-block;
-  margin: 0 12px;
+  margin: 0 8px;
+}
+
+.content li a,
+.content li:first-child {
+  display: inline-block;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
 }
 
 .content a {
@@ -34,7 +56,7 @@ li {
 }
 
 .content a:hover {
-  text-decoration: underline;
+  background: #ff4d6d;
 }
 
 .logo {
@@ -42,25 +64,29 @@ li {
   max-width: 80%;
   margin: 30px auto 10px;
   display: block;
+  border-radius: 24px;
+  box-shadow: 0 0 30px #4cc9f0, 0 0 60px #7209b7;
 }
 
 .content p {
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.7;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 16px 20px;
+  border-radius: 14px;
 }
 
 .tombol {
   display: inline-block;
   margin-top: 15px;
   padding: 12px 28px;
-  background-color: #fff;
-  color: #000;
-  border-radius: 8px;
+  background: linear-gradient(90deg, #ff4d6d, #ff9e00);
+  color: #fff;
+  border-radius: 30px;
   font-weight: bold;
 }
 
 .tombol:hover {
-  background-color: #ccc;
-  text-decoration: none;
+  background: linear-gradient(90deg, #4cc9f0, #7209b7);
 }
