@@ -1,9 +1,9 @@
 // ===== DAFTAR LAGU =====
 // Taruh 3 file mp3 di folder "lagu" di repo, lalu samakan nama file di sini.
 const lagu = [
-  { judul: "Lagu 1", file: "lagu/lagu1.mp3" },
-  { judul: "Lagu 2", file: "lagu/lagu2.mp3" },
-  { judul: "Lagu 3", file: "lagu/lagu3.mp3" },
+  { judul: "Lagu 1", file: "lagu1.mp3" },
+  { judul: "Lagu 2", file: "lagu2.mp3" },
+  { judul: "Lagu 3", file: "lagu3.mp3" },
 ];
 
 const audio = new Audio();
