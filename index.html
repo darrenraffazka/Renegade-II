@@ -13,6 +13,7 @@
 
   <div class="content">
     <h1>Idaman Kamu</h1>
+    <p class="tagline">Merajut dari nol, bersinar bersama.</p>
 
     <ul>
       <li><a href="#">Beranda</a></li>
@@ -25,25 +26,21 @@
       <img src="logo.jpg" alt="Logo Idaman Kamu" class="logo">
 
       <h2>Filosofi Logo</h2>
-      <p>
+      <div class="kartu">
         Logo kami berbentuk laba-laba putih di atas latar hitam. Laba-laba melambangkan
         kesabaran, ketekunan, dan kemampuan merajut sesuatu dari nol. Kaki-kakinya yang
         menyebar menggambarkan kekuatan kelompok yang saling terhubung, sedangkan
         warna putih di atas hitam melambangkan keberanian untuk tampil beda dan bersinar
         di tengah kegelapan. Itulah semangat kelompok Idaman Kamu.
-      </p>
+      </div>
 
       <h2>Lihat Desain Kami</h2>
-
-<div style="position: relative; width: 100%; max-width: 800px; margin: 20px auto; height: 0; padding-top: 56.25%; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); overflow: hidden; border-radius: 8px; will-change: transform;">
-  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
-    src="https://www.canva.com/design/DAHXPYbyAHE/PptDLQZzqv6aePvcUfbG6w/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-  </iframe>
-</div>
-
-<a href="https://www.canva.com/design/DAHXPYbyAHE/PptDLQZzqv6aePvcUfbG6w/view" target="_blank" rel="noopener" class="tombol">
-  Buka di Canva
-</a>
+      <div class="embed">
+        <iframe loading="lazy"
+          src="https://www.canva.com/design/DAHXPYbyAHE/PptDLQZzqv6aePvcUfbG6w/view?embed"
+          allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+      </div>
+      <a class="tombol" href="https://www.canva.com/design/DAHXPYbyAHE/PptDLQZzqv6aePvcUfbG6w/view" target="_blank" rel="noopener">Buka di Canva</a>
     </section>
 
     <!-- ===== DESAIN ===== -->
@@ -60,26 +57,35 @@
         <div class="warna"><div class="kotak" style="background:#ff9e00"></div><strong>Oranye</strong><code>#ff9e00</code></div>
         <div class="warna"><div class="kotak" style="background:#ffffff"></div><strong>Putih (teks)</strong><code>#ffffff</code></div>
       </div>
+      <p class="petunjuk">Klik kotak warna untuk menyalin kodenya.</p>
     </section>
 
     <!-- ===== PRODUK ===== -->
     <section id="produk" class="halaman">
       <h2>Produk Kami</h2>
-      <p>Halaman ini masih kosong. Isi produk segera hadir.</p>
+      <div class="kartu">Halaman ini masih kosong. Isi produk segera hadir.</div>
     </section>
+
+    <footer>© 2026 Idaman Kamu</footer>
   </div>
 
-  <!-- ===== PEMUTAR LAGU (butuh script.js) ===== -->
+  <!-- ===== LAYAR MASUK + PEMUTAR LAGU (butuh script.js) ===== -->
   <div id="overlay">
     <h2>Idaman Kamu</h2>
+    <p>Klik untuk masuk, lagu akan diputar.</p>
     <button id="btn-masuk">Masuk 🎵</button>
   </div>
+
   <div id="player">
-    <button id="btn-prev">⏮</button>
-    <button id="btn-play">▶</button>
-    <button id="btn-next">⏭</button>
-    <span id="judul-lagu"></span>
+    <button id="btn-prev" aria-label="Lagu sebelumnya">⏮</button>
+    <button id="btn-play" aria-label="Putar atau jeda">▶</button>
+    <button id="btn-next" aria-label="Lagu berikutnya">⏭</button>
+    <div class="info">
+      <span id="judul-lagu"></span>
+      <input type="range" id="progres" min="0" max="100" value="0" step="0.1">
+    </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
