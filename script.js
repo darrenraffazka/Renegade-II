@@ -1,68 +1,96 @@
 // ===== DAFTAR LAGU =====
-// Taruh 3 file mp3 di folder "lagu" di repo, lalu samakan nama file di sini.
+// Taruh 3 file mp3 di repo (sejajar index.html), lalu samakan nama file di sini.
 const lagu = [
   { judul: "Lagu 1", file: "lagu1.mp3" },
   { judul: "Lagu 2", file: "lagu2.mp3" },
   { judul: "Lagu 3", file: "lagu3.mp3" },
 ];
 
+// ===== PEMUTAR =====
+const $ = (id) => document.getElementById(id);
+const overlay = $("overlay");
+const btnPlay = $("btn-play");
+const label = $("judul-lagu");
+const progres = $("progres");
 const audio = new Audio();
-const overlay = document.getElementById("overlay");
-const tombolPlay = document.getElementById("btn-play");
-const labelLagu = document.getElementById("judul-lagu");
 
-// Posisi lagu disimpan, jadi pindah halaman tidak mengulang dari awal
-let index = parseInt(localStorage.getItem("laguIndex")) || 0;
-let waktu = parseFloat(localStorage.getItem("laguWaktu")) || 0;
-let dijeda = localStorage.getItem("laguDijeda") === "1";
+// penyimpanan aman (tidak error kalau browser memblokir)
+const ambil = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const simpan = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+const sudahMasuk = () => { try { return sessionStorage.getItem("masuk"); } catch (e) { return null; } };
+const tandaiMasuk = () => { try { sessionStorage.setItem("masuk", "1"); } catch (e) {} };
 
-function muat(i, mulaiDari = 0) {
+let index = parseInt(ambil("laguIndex")) || 0;
+if (index >= lagu.length) index = 0;
+let waktu = parseFloat(ambil("laguWaktu")) || 0;
+let dijeda = ambil("laguDijeda") === "1";
+
+function muat(i, mulai = 0) {
   index = (i + lagu.length) % lagu.length;
   audio.src = lagu[index].file;
-  audio.currentTime = mulaiDari;
-  labelLagu.textContent = lagu[index].judul;
-  localStorage.setItem("laguIndex", index);
+  label.textContent = lagu[index].judul;
+  progres.value = 0;
+  simpan("laguIndex", index);
+  if (mulai > 0) {
+    audio.addEventListener("loadedmetadata", () => { audio.currentTime = mulai; }, { once: true });
+  }
 }
 
-function putar() {
-  return audio.play().then(() => {
-    dijeda = false;
-    localStorage.setItem("laguDijeda", "0");
-    tombolPlay.textContent = "⏸";
-  });
-}
+const putar = () => audio.play();
+const coba = () => putar().catch(() => {}); // error file ditampilkan oleh event "error" di bawah
 
-function jeda() {
-  audio.pause();
-  dijeda = true;
-  localStorage.setItem("laguDijeda", "1");
-  tombolPlay.textContent = "▶";
-}
+// tombol berubah sesuai keadaan lagu yang sebenarnya
+audio.addEventListener("play", () => { btnPlay.textContent = "⏸"; dijeda = false; simpan("laguDijeda", "0"); });
+audio.addEventListener("pause", () => { btnPlay.textContent = "▶"; });
 
-tombolPlay.onclick = () => (audio.paused ? putar() : jeda());
-document.getElementById("btn-next").onclick = () => { muat(index + 1); putar(); };
-document.getElementById("btn-prev").onclick = () => { muat(index - 1); putar(); };
-audio.onended = () => { muat(index + 1); putar(); };
+// kalau mp3 tidak ketemu, nama file yang dicari tampil di pemutar
+audio.addEventListener("error", () => {
+  label.textContent = "⚠ " + lagu[index].file + " tidak ketemu";
+});
 
-// Simpan posisi lagu tiap detik
-setInterval(() => localStorage.setItem("laguWaktu", audio.currentTime), 1000);
+audio.addEventListener("timeupdate", () => {
+  simpan("laguWaktu", audio.currentTime);
+  if (audio.duration) progres.value = (audio.currentTime / audio.duration) * 100;
+});
+audio.addEventListener("ended", () => { muat(index + 1); coba(); });
+
+progres.addEventListener("input", () => {
+  if (audio.duration) audio.currentTime = (progres.value / 100) * audio.duration;
+});
+
+btnPlay.onclick = () => {
+  if (audio.paused) coba();
+  else { audio.pause(); dijeda = true; simpan("laguDijeda", "1"); }
+};
+$("btn-next").onclick = () => { muat(index + 1); coba(); };
+$("btn-prev").onclick = () => { muat(index - 1); coba(); };
 
 // Tombol "Masuk" (browser wajib ada klik dulu sebelum suara boleh jalan)
-document.getElementById("btn-masuk").onclick = () => {
-  sessionStorage.setItem("masuk", "1");
+$("btn-masuk").onclick = () => {
+  tandaiMasuk();
   overlay.style.display = "none";
-  putar();
+  coba();
 };
 
 // ===== SAAT HALAMAN DIBUKA =====
 muat(index, waktu);
-tombolPlay.textContent = "▶";
 
 if (!dijeda) {
-  if (sessionStorage.getItem("masuk")) {
-    // sudah pernah klik "Masuk": coba lanjut otomatis, kalau diblokir tampilkan overlay lagi
-    putar().catch(() => (overlay.style.display = "flex"));
+  if (sudahMasuk()) {
+    // sudah pernah klik "Masuk": lanjut otomatis, kalau diblokir tampilkan layar masuk lagi
+    putar().catch(() => { overlay.style.display = "flex"; });
   } else {
     overlay.style.display = "flex";
   }
 }
+
+// ===== HALAMAN DESAIN: klik kotak warna untuk salin kode =====
+document.querySelectorAll(".warna").forEach((kotak) => {
+  const kode = kotak.querySelector("code");
+  const hex = kode.textContent;
+  kotak.addEventListener("click", () => {
+    if (navigator.clipboard) navigator.clipboard.writeText(hex);
+    kode.textContent = "Tersalin!";
+    setTimeout(() => { kode.textContent = hex; }, 1000);
+  });
+});
