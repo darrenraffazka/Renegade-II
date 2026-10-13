@@ -7,27 +7,33 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- penanda halaman (jangan dihapus, dipakai menu) -->
+  <div id="p-desain"></div>
+  <div id="p-produk"></div>
+
   <div class="content">
     <h1>Idaman Kamu</h1>
 
     <ul>
-      <li>Beranda</li>
-      <li><a href="desain.html">Desain</a></li>
-      <li><a href="produk.html">Produk</a></li>
+      <li><a href="#">Beranda</a></li>
+      <li><a href="#p-desain">Desain</a></li>
+      <li><a href="#p-produk">Produk</a></li>
     </ul>
 
-    <img src="logo.jpg" alt="Logo Idaman Kamu" class="logo">
+    <!-- ===== BERANDA ===== -->
+    <section id="beranda" class="halaman">
+      <img src="logo.jpg" alt="Logo Idaman Kamu" class="logo">
 
-    <h2>Filosofi Logo</h2>
-    <p>
-      Logo kami berbentuk laba-laba putih di atas latar hitam. Laba-laba melambangkan
-      kesabaran, ketekunan, dan kemampuan merajut sesuatu dari nol. Kaki-kakinya yang
-      menyebar menggambarkan kekuatan kelompok yang saling terhubung, sedangkan
-      warna putih di atas hitam melambangkan keberanian untuk tampil beda dan bersinar
-      di tengah kegelapan. Itulah semangat kelompok Idaman Kamu.
-    </p>
+      <h2>Filosofi Logo</h2>
+      <p>
+        Logo kami berbentuk laba-laba putih di atas latar hitam. Laba-laba melambangkan
+        kesabaran, ketekunan, dan kemampuan merajut sesuatu dari nol. Kaki-kakinya yang
+        menyebar menggambarkan kekuatan kelompok yang saling terhubung, sedangkan
+        warna putih di atas hitam melambangkan keberanian untuk tampil beda dan bersinar
+        di tengah kegelapan. Itulah semangat kelompok Idaman Kamu.
+      </p>
 
-    <h2>Lihat Desain Kami</h2>
+      <h2>Lihat Desain Kami</h2>
 
 <div style="position: relative; width: 100%; max-width: 800px; margin: 20px auto; height: 0; padding-top: 56.25%; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); overflow: hidden; border-radius: 8px; will-change: transform;">
   <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
@@ -38,6 +44,42 @@
 <a href="https://www.canva.com/design/DAHXPYbyAHE/PptDLQZzqv6aePvcUfbG6w/view" target="_blank" rel="noopener" class="tombol">
   Buka di Canva
 </a>
+    </section>
+
+    <!-- ===== DESAIN ===== -->
+    <section id="desain" class="halaman">
+      <h2>Warna yang Kami Pakai</h2>
+      <div class="warna-grid">
+        <div class="warna"><div class="kotak" style="background:#1a0033"></div><strong>Ungu Gelap</strong><code>#1a0033</code></div>
+        <div class="warna"><div class="kotak" style="background:#3a0ca3"></div><strong>Ungu Terang</strong><code>#3a0ca3</code></div>
+        <div class="warna"><div class="kotak" style="background:#0077b6"></div><strong>Biru</strong><code>#0077b6</code></div>
+        <div class="warna"><div class="kotak" style="background:#ff4d6d"></div><strong>Merah Muda</strong><code>#ff4d6d</code></div>
+        <div class="warna"><div class="kotak" style="background:#ffd60a"></div><strong>Kuning</strong><code>#ffd60a</code></div>
+        <div class="warna"><div class="kotak" style="background:#4cc9f0"></div><strong>Biru Muda</strong><code>#4cc9f0</code></div>
+        <div class="warna"><div class="kotak" style="background:#7209b7"></div><strong>Ungu Neon</strong><code>#7209b7</code></div>
+        <div class="warna"><div class="kotak" style="background:#ff9e00"></div><strong>Oranye</strong><code>#ff9e00</code></div>
+        <div class="warna"><div class="kotak" style="background:#ffffff"></div><strong>Putih (teks)</strong><code>#ffffff</code></div>
+      </div>
+    </section>
+
+    <!-- ===== PRODUK ===== -->
+    <section id="produk" class="halaman">
+      <h2>Produk Kami</h2>
+      <p>Halaman ini masih kosong. Isi produk segera hadir.</p>
+    </section>
   </div>
+
+  <!-- ===== PEMUTAR LAGU (butuh script.js) ===== -->
+  <div id="overlay">
+    <h2>Idaman Kamu</h2>
+    <button id="btn-masuk">Masuk 🎵</button>
+  </div>
+  <div id="player">
+    <button id="btn-prev">⏮</button>
+    <button id="btn-play">▶</button>
+    <button id="btn-next">⏭</button>
+    <span id="judul-lagu"></span>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
